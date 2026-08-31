@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noise Floor</title>
+  <script>
+    /*
+      GitHub Pages doesn't support dynamic routes natively.
+
+      This page catches URLs such as:
+        /Club-Website/r/poster-a
+
+      and sends the visitor back to the main application while preserving
+      the QR tracking code.
+    */
+
+    (function () {
+      const path = window.location.pathname;
+      const parts = path.split("/").filter(Boolean);
+
+      // GitHub Pages project site:
+      // /Club-Website/r/CODE
+      const routeIndex = parts.indexOf("r");
+
+      if (routeIndex !== -1 && parts[routeIndex + 1]) {
+        const code = parts[routeIndex + 1];
+
+        const baseParts = parts.slice(0, routeIndex);
+        const basePath =
+          "/" + (baseParts.length ? baseParts.join("/") + "/" : "");
+
+        window.location.replace(
+          window.location.origin +
+          basePath +
+          "?qr=" +
+          encodeURIComponent(code)
+        );
+
+        return;
+      }
+
+      // Unknown page: return to the website homepage.
+      const repoName = parts[0];
+
+      if (repoName) {
+        window.location.replace(
+          window.location.origin + "/" + repoName + "/"
+        );
+      } else {
+        window.location.replace(window.location.origin + "/");
+      }
+    })();
+  </script>
+</head>
+
+<body>
+  <p>Redirecting to Noise Floor…</p>
+</body>
+</html>
