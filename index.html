@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f4ed" />
+  <title>Noise Floor</title>
+  <meta name="description" content="Noise Floor — music, electronics, waves." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="shell">
+
+    <header class="topline">
+      <span>NF_001</span>
+      <span id="clock">--:--</span>
+    </header>
+
+    <section class="hero">
+      <div class="mark" aria-hidden="true">NF</div>
+
+      <p class="eyebrow">
+        QUT / BRISBANE / AUDIO ENGINEERING CLUB
+      </p>
+
+      <h1>
+        NOISE<br>
+        FLOOR
+      </h1>
+
+      <p class="tagline" id="tagline">
+        music · electronics · waves
+      </p>
+
+      <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 800 100" role="img" aria-label="waveform">
+          <path d="M0 50 H120 L150 50 L170 14 L195 86 L222 32 L250 68 L280 45 L305 50 H390 L410 50 L430 20 L454 78 L480 40 L510 61 L536 49 H800"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="links" id="links" aria-live="polite">
+      <div class="loading">LOADING SIGNAL…</div>
+    </section>
+
+    <section class="audio-panel" id="audioPanel" hidden>
+      <div>
+        <span class="micro">CURRENT SIGNAL</span>
+        <strong id="trackName">Noise Floor</strong>
+      </div>
+
+      <button
+        id="soundButton"
+        class="sound-button"
+        type="button"
+      >
+        ENTER WITH SOUND
+      </button>
+
+      <audio
+        id="bgAudio"
+        loop
+        preload="none"
+      ></audio>
+    </section>
+
+    <footer>
+      <span>NOISE FLOOR</span>
+      <span>READ THE SIGNAL / MAKE SOME NOISE</span>
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
