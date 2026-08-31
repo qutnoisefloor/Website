@@ -1,0 +1,50 @@
+:root { --admin-bg:#dfe5e3; }
+body { background:var(--admin-bg); }
+.admin-shell { width:min(1100px, calc(100% - 28px)); margin:0 auto; padding:28px 0 60px; }
+.admin-header { display:flex; justify-content:space-between; align-items:flex-start; border-top:1px solid var(--ink); padding-top:12px; margin-bottom:24px; }
+.admin-header h1 { margin:18px 0 4px; font-family:var(--serif); font-size:44px; font-weight:400; }
+.admin-header p { margin:0; color:var(--muted); font-size:11px; letter-spacing:.12em; text-transform:uppercase; }
+.panel { background:rgba(246,247,245,.75); border:1px solid rgba(16,24,32,.2); padding:20px; margin:14px 0; box-shadow:0 8px 25px rgba(7,21,34,.06); }
+.login-panel { max-width:440px; margin:60px auto; }
+.panel h2 { margin:5px 0 0; font-family:var(--serif); font-size:30px; font-weight:400; }
+.panel-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); padding-bottom:13px; margin-bottom:13px; }
+.grid-2 { display:grid; grid-template-columns:1.2fr .8fr; gap:14px; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+.stat { border:1px solid rgba(16,24,32,.18); background:rgba(246,247,245,.7); padding:16px; }
+.stat b { display:block; font-size:30px; font-weight:500; color:var(--blue); }
+.stat span { color:var(--muted); font-size:9px; text-transform:uppercase; letter-spacing:.15em; }
+form { display:grid; gap:10px; }
+input { width:100%; border:1px solid rgba(16,24,32,.25); background:#f8f9f7; padding:11px; color:var(--ink); font:inherit; font-size:12px; }
+label { display:grid; gap:5px; color:var(--muted); font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+button { border:1px solid var(--blue); background:var(--blue); color:#fff; padding:11px 13px; font:inherit; font-size:10px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
+button:hover { filter:brightness(1.08); }
+.outline-button, .small-button { background:transparent; color:var(--blue); }
+.full { width:100%; margin-top:10px; }
+.admin-list { display:grid; gap:7px; }
+.admin-row { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; border-bottom:1px solid rgba(16,24,32,.1); padding:11px 0; }
+.admin-row:last-child { border-bottom:0; }
+.row-title { font-size:12px; letter-spacing:.05em; }
+.row-meta { color:var(--muted); font-size:10px; margin-top:3px; word-break:break-all; }
+.row-actions { display:flex; gap:6px; }
+.row-actions button { padding:7px 8px; font-size:8px; }
+.danger { border-color:#7d2d2d; color:#7d2d2d; background:transparent; }
+.muted, .status, .error { color:var(--muted); font-family:var(--serif); line-height:1.4; }
+.error { color:#7d2d2d; min-height:1.2em; }
+.hour-chart { display:grid; grid-template-columns:repeat(24,1fr); gap:4px; align-items:end; height:180px; padding:10px 0; border-bottom:1px solid var(--line); }
+.hour-bar { min-height:2px; background:var(--blue); opacity:.8; position:relative; }
+.hour-bar span { position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:7px; color:var(--muted); }
+.traffic-table { margin-top:32px; display:grid; gap:6px; font-size:10px; }
+.traffic-line { display:grid; grid-template-columns:1fr 1fr 1fr; padding:7px 0; border-bottom:1px solid rgba(16,24,32,.08); }
+code { color:var(--blue); }
+dialog { border:0; padding:0; background:transparent; max-width:min(480px, calc(100% - 24px)); width:100%; }
+dialog::backdrop { background:rgba(7,21,34,.72); backdrop-filter:blur(5px); }
+.dialog-card { background:var(--paper); border:1px solid rgba(255,255,255,.3); padding:24px; box-shadow:var(--shadow); }
+.dialog-card h2 { margin-bottom:14px; }
+.dialog-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:6px; }
+.check { display:flex; grid-template-columns:auto 1fr; align-items:center; gap:8px; flex-direction:row; }
+.check input { width:auto; }
+@media (max-width:760px) {
+  .grid-2,.stats { grid-template-columns:1fr; }
+  .admin-header h1 { font-size:34px; }
+  .hour-chart { gap:2px; }
+}
