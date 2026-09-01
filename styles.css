@@ -71,51 +71,32 @@ a {
    ========================================================== */
 
 .site {
-
   position: relative;
 
-  width: 100%;
-  min-height: 100svh;
+  width: min(1180px, calc(100% - 64px));
+  height: min(760px, calc(100vh - 80px));
+  min-height: 620px;
+
+  margin: 40px auto;
 
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      135deg,
-      #dde5ea,
-      #c9d5dc 55%,
-      #b4c4cd
-    );
-
+  background: #dce3e8;
 }
 
-
-/* ==========================================================
-   BACKGROUND PHOTO
-
-   Put your image at:
-
-   assets/hero.png
-   ========================================================== */
-
 .hero-image {
-
   position: absolute;
   inset: 0;
 
-  background-image:
-    url("assets/hero.png");
-
+  background-image: url("assets/hero.png");
   background-size: cover;
-
-  background-position:
-    center center;
+  background-position: center center;
 
   filter:
-    saturate(0.72)
-    contrast(0.94)
-    brightness(1.03);
-
+    saturate(0.82)
+    contrast(0.96)
+    brightness(1.02);
+}
   transform: scale(1.015);
 
 }
