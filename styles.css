@@ -1,424 +1,1003 @@
-/* ============================================================
+/* ==========================================================
    NOISE FLOOR
-   Public link hub
-   ============================================================ */
+   editorial / field recording / audio-object interface
+   ========================================================== */
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap");
+@import url(
+  "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Caslon+Display&display=swap"
+);
+
+
+/* ==========================================================
+   VARIABLES
+   ========================================================== */
 
 :root {
-  --paper: #f3f1e8;
-  --ink: #111111;
-  --blue: #1746d1;
-  --blue-dark: #102a76;
-  --muted: #74746e;
-  --line: rgba(17, 17, 17, 0.25);
 
-  --mono: "IBM Plex Mono", monospace;
-  --sans: "Inter", Arial, sans-serif;
+  --blue: #173a73;
+  --blue-bright: #2f5fb6;
 
-  --max-width: 680px;
+  --mist: #dce4e9;
+
+  --paper: #edf1f3;
+
+  --white: #f6f7f7;
+
+  --soft-white: rgba(247, 249, 250, 0.78);
+
+  --line: rgba(23, 58, 115, 0.38);
+
+  --mono:
+    "IBM Plex Mono",
+    monospace;
+
+  --serif:
+    "Libre Caslon Display",
+    Georgia,
+    serif;
 }
 
-/* ---------- RESET ---------- */
+
+/* ==========================================================
+   RESET
+   ========================================================== */
 
 * {
   box-sizing: border-box;
 }
 
-html {
+html,
+body {
+  margin: 0;
   min-height: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-
-  background:
-    linear-gradient(
-      rgba(243, 241, 232, 0.94),
-      rgba(243, 241, 232, 0.94)
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(0, 0, 0, 0.018) 4px
-    );
-
-  color: var(--ink);
+  background: #dce3e8;
+  color: var(--blue);
   font-family: var(--mono);
+
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- PAPER GRAIN ---------- */
+button,
+a {
+  font: inherit;
+}
 
-.grain {
-  position: fixed;
+
+/* ==========================================================
+   MAIN CANVAS
+   ========================================================== */
+
+.site {
+
+  position: relative;
+
+  width: 100%;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #dde5ea,
+      #c9d5dc 55%,
+      #b4c4cd
+    );
+
+}
+
+
+/* ==========================================================
+   BACKGROUND PHOTO
+
+   Put your image at:
+
+   assets/hero.jpg
+   ========================================================== */
+
+.hero-image {
+
+  position: absolute;
   inset: 0;
-  pointer-events: none;
-  opacity: 0.16;
-  z-index: 999;
 
   background-image:
+    url("assets/hero.jpg");
+
+  background-size: cover;
+
+  background-position:
+    center center;
+
+  filter:
+    saturate(0.72)
+    contrast(0.94)
+    brightness(1.03);
+
+  transform: scale(1.015);
+
+}
+
+
+/* airy pale wash */
+
+.wash {
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(235, 241, 244, 0.35) 0%,
+      rgba(235, 241, 244, 0.11) 42%,
+      rgba(20, 48, 92, 0.02) 100%
+    ),
+
+    linear-gradient(
+      180deg,
+      rgba(240, 244, 246, 0.16),
+      rgba(15, 43, 83, 0.07)
+    );
+
+}
+
+
+/* very subtle analogue texture */
+
+.grain {
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.13;
+
+  background-image:
+
     radial-gradient(
-      rgba(0, 0, 0, 0.18) 0.45px,
-      transparent 0.45px
+      rgba(14, 42, 80, 0.28) 0.45px,
+      transparent 0.5px
     );
 
   background-size: 5px 5px;
+
   mix-blend-mode: multiply;
+
 }
 
-/* ---------- MAIN SHELL ---------- */
 
-.shell {
-  width: min(calc(100% - 32px), var(--max-width));
-  margin: 0 auto;
-  padding: 22px 0 45px;
+/* ==========================================================
+   INTRO
+   ========================================================== */
+
+.intro {
+
+  position: absolute;
+
+  top: clamp(34px, 7vh, 80px);
+  left: clamp(24px, 5vw, 70px);
+
+  z-index: 10;
+
+  max-width: 450px;
+
 }
 
-/* ---------- TOP STATUS LINE ---------- */
 
-.topline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.intro-title {
 
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  font-family: var(--serif);
 
-  padding: 8px 2px;
+  font-size:
+    clamp(28px, 3.3vw, 52px);
 
-  font-size: 10px;
-  letter-spacing: 0.12em;
-}
-
-/* ---------- HERO ---------- */
-
-.hero {
-  position: relative;
-  padding: 52px 0 28px;
-}
-
-.mark {
-  width: 48px;
-  height: 48px;
-
-  display: grid;
-  place-items: center;
-
-  margin-bottom: 28px;
-
-  background: var(--blue);
-  color: white;
-
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-}
-
-.eyebrow {
-  margin: 0 0 10px;
-
-  color: var(--blue);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-}
-
-h1 {
-  margin: 0;
-
-  font-family: var(--sans);
-  font-size: clamp(66px, 18vw, 118px);
-  line-height: 0.77;
-
-  font-weight: 700;
-  letter-spacing: -0.085em;
-
-  color: var(--ink);
-}
-
-.tagline {
-  margin: 24px 0 0;
-
-  font-size: 12px;
-  letter-spacing: 0.08em;
-
-  color: var(--muted);
-}
-
-/* ---------- WAVEFORM ---------- */
-
-.wave {
-  margin-top: 35px;
-  width: 100%;
-  overflow: hidden;
-}
-
-.wave svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.wave path {
-  fill: none;
-  stroke: var(--blue);
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-}
-
-/* ---------- LINKS ---------- */
-
-.links {
-  border-top: 1px solid var(--ink);
-  margin-top: 8px;
-}
-
-.link-row {
-  position: relative;
-
-  display: grid;
-  grid-template-columns: 45px 1fr auto;
-  gap: 12px;
-  align-items: center;
-
-  min-height: 73px;
-  padding: 12px 3px;
-
-  color: var(--ink);
-  text-decoration: none;
-
-  border-bottom: 1px solid var(--line);
-
-  transition:
-    background 120ms ease,
-    color 120ms ease,
-    padding 120ms ease;
-}
-
-.link-row:hover {
-  background: var(--blue);
-  color: white;
-  padding-left: 13px;
-  padding-right: 13px;
-}
-
-.link-number {
-  color: var(--blue);
-
-  font-size: 10px;
-  letter-spacing: 0.08em;
-}
-
-.link-row:hover .link-number {
-  color: white;
-}
-
-.link-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.link-title {
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.link-description {
-  color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.04em;
-}
-
-.link-row:hover .link-description {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.link-arrow {
-  font-size: 17px;
   line-height: 1;
-}
 
-.loading,
-.empty-state {
-  padding: 30px 2px;
+  letter-spacing: -0.035em;
 
-  border-bottom: 1px solid var(--line);
-
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-}
-
-/* ---------- AUDIO ---------- */
-
-.audio-panel {
-  margin-top: 42px;
-  padding: 13px 0;
-
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-.audio-panel > div {
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.audio-panel strong {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.micro {
   color: var(--blue);
 
-  font-size: 8px;
-  letter-spacing: 0.14em;
+  text-shadow:
+    0 1px 10px
+    rgba(245, 248, 250, 0.38);
+
 }
 
-.sound-button {
-  flex-shrink: 0;
 
-  border: 1px solid var(--ink);
-  border-radius: 0;
+.intro-title span {
 
-  padding: 10px 13px;
-
-  background: transparent;
-  color: var(--ink);
+  margin: 0 7px;
 
   font-family: var(--mono);
-  font-size: 8px;
+
+  font-size: 0.58em;
+
+  opacity: 0.72;
+
+}
+
+
+.intro-rule {
+
+  width: 42px;
+  height: 1px;
+
+  margin-top: 19px;
+
+  background: var(--blue);
+
+}
+
+
+.intro p {
+
+  margin:
+    18px 0 0;
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    clamp(14px, 1.4vw, 19px);
+
+  line-height: 1.3;
+
+  color: var(--blue);
+
+}
+
+
+/* ==========================================================
+   VERTICAL BRAND
+   ========================================================== */
+
+.vertical-brand {
+
+  position: absolute;
+
+  top: clamp(30px, 5vh, 60px);
+  right: clamp(18px, 4vw, 55px);
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 18px;
+
+}
+
+
+.signal-icon {
+
+  width: 40px;
+  height: 40px;
+
+}
+
+
+.signal-icon svg {
+
+  width: 100%;
+  height: 100%;
+
+  fill: none;
+
+  stroke: var(--blue);
+
+  stroke-width: 1.3;
+
+  vector-effect:
+    non-scaling-stroke;
+
+}
+
+
+.vertical-name {
+
+  writing-mode:
+    vertical-rl;
+
+  text-orientation:
+    mixed;
+
+  font-size: 10px;
+
   font-weight: 600;
-  letter-spacing: 0.1em;
+
+  letter-spacing:
+    0.36em;
+
+  color: var(--blue);
+
+}
+
+
+/* ==========================================================
+   LINKS
+   ========================================================== */
+
+.link-zone {
+
+  position: absolute;
+
+  left: clamp(24px, 5vw, 70px);
+
+  bottom:
+    clamp(130px, 20vh, 210px);
+
+  z-index: 15;
+
+  width:
+    min(520px, calc(100vw - 120px));
+
+}
+
+
+.section-label {
+
+  margin-bottom: 10px;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+
+  color: var(--blue);
+
+}
+
+
+.links {
+
+  width: 100%;
+
+  border-top:
+    1px solid var(--line);
+
+}
+
+
+.link-row {
+
+  display: grid;
+
+  grid-template-columns:
+    34px
+    minmax(0, 1fr)
+    24px;
+
+  gap: 12px;
+
+  align-items: center;
+
+  min-height: 54px;
+
+  padding:
+    9px 2px;
+
+  color: var(--blue);
+
+  text-decoration: none;
+
+  border-bottom:
+    1px solid var(--line);
+
+  transition:
+    padding 180ms ease,
+    background 180ms ease,
+    backdrop-filter 180ms ease;
+
+}
+
+
+.link-row:hover {
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  background:
+    rgba(238, 243, 246, 0.56);
+
+  backdrop-filter:
+    blur(12px);
+
+}
+
+
+.link-number {
+
+  font-size: 8px;
+
+  font-weight: 500;
+
+  opacity: 0.72;
+
+}
+
+
+.link-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  gap: 1px;
+
+}
+
+
+.link-title {
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-family:
+    var(--serif);
+
+  font-size:
+    20px;
+
+  line-height: 1.05;
+
+  letter-spacing:
+    -0.02em;
+
+}
+
+
+.link-description {
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: 7px;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  opacity: 0.68;
+
+}
+
+
+.link-arrow {
+
+  justify-self: end;
+
+  font-size: 14px;
+
+}
+
+
+.loading,
+.empty-state,
+.system-message {
+
+  padding:
+    18px 0;
+
+  font-family:
+    var(--mono);
+
+  font-size: 8px;
+
+  letter-spacing:
+    0.1em;
+
+  border-bottom:
+    1px solid var(--line);
+
+}
+
+
+/* ==========================================================
+   AUDIO
+   ========================================================== */
+
+.audio-panel {
+
+  position: absolute;
+
+  left: clamp(24px, 5vw, 70px);
+
+  bottom:
+    clamp(58px, 8vh, 90px);
+
+  z-index: 20;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    auto
+    minmax(100px, 190px);
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+
+.sound-control {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border:
+
+    1px solid
+    rgba(23, 58, 115, 0.42);
+
+  border-radius: 50%;
+
+  background:
+
+    rgba(244, 247, 249, 0.66);
+
+  color: var(--blue);
+
+  backdrop-filter:
+    blur(14px);
 
   cursor: pointer;
 
   transition:
-    background 120ms ease,
-    color 120ms ease;
+    transform 160ms ease,
+    background 160ms ease;
+
 }
 
-.sound-button:hover {
-  background: var(--ink);
-  color: var(--paper);
+
+.sound-control:hover {
+
+  transform:
+    scale(1.06);
+
+  background:
+    rgba(246, 248, 250, 0.9);
+
 }
 
-.sound-button.playing {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: white;
+
+.sound-control.playing {
+
+  background:
+    var(--blue);
+
+  color:
+    var(--white);
+
 }
 
-/* ---------- FOOTER ---------- */
 
-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+.play-symbol {
 
-  margin-top: 55px;
-
-  color: var(--muted);
-
-  font-size: 8px;
-  letter-spacing: 0.1em;
-}
-
-footer span:last-child {
-  text-align: right;
-}
-
-/* ---------- ERROR / OFFLINE ---------- */
-
-.system-message {
-  padding: 18px 2px;
-
-  border-bottom: 1px solid var(--line);
-
-  color: var(--muted);
+  margin-left: 2px;
 
   font-size: 10px;
-  line-height: 1.7;
+
 }
 
-.system-message strong {
-  color: var(--ink);
+
+.audio-info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 84px;
+
+  font-family:
+    var(--serif);
+
+  font-size: 11px;
+
 }
 
-/* ---------- MOBILE ---------- */
 
-@media (max-width: 520px) {
-  .shell {
-    width: calc(100% - 28px);
-    padding-top: 14px;
+.micro {
+
+  margin-bottom: 2px;
+
+  font-family:
+    var(--mono);
+
+  font-size: 6px;
+
+  font-weight: 600;
+
+  letter-spacing:
+    0.14em;
+
+}
+
+
+.mini-wave {
+
+  opacity: 0.84;
+
+}
+
+
+.mini-wave svg {
+
+  display: block;
+
+  width: 100%;
+  height: 30px;
+
+}
+
+
+.mini-wave path {
+
+  fill: none;
+
+  stroke: var(--blue);
+
+  stroke-width: 1;
+
+  vector-effect:
+    non-scaling-stroke;
+
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.footer {
+
+  position: absolute;
+
+  right: clamp(24px, 5vw, 70px);
+
+  bottom:
+    clamp(35px, 5vh, 60px);
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 22px;
+
+}
+
+
+.footer-left {
+
+  display: none;
+
+}
+
+
+.footer-centre {
+
+  width: 90px;
+
+}
+
+
+.footer-wave {
+
+  width: 100%;
+
+}
+
+
+.footer-wave path {
+
+  fill: none;
+
+  stroke: var(--blue);
+
+  stroke-width: 0.8;
+
+}
+
+
+.footer-right {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 5px;
+
+  color: var(--blue);
+
+}
+
+
+.footer-right strong {
+
+  font-size: 8px;
+
+  font-weight: 500;
+
+  letter-spacing:
+    0.16em;
+
+}
+
+
+.footer-right span {
+
+  font-size: 6px;
+
+  letter-spacing:
+    0.22em;
+
+}
+
+
+/* ==========================================================
+   CLOCK
+   ========================================================== */
+
+.clock {
+
+  position: absolute;
+
+  left:
+    clamp(24px, 5vw, 70px);
+
+  top: 18px;
+
+  z-index: 10;
+
+  font-size: 6px;
+
+  letter-spacing:
+    0.2em;
+
+  opacity: 0.65;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media
+(max-width: 700px) {
+
+  .site {
+
+    min-height:
+      100svh;
+
   }
 
-  .hero {
-    padding-top: 38px;
+
+  .hero-image {
+
+    background-position:
+      58% center;
+
   }
 
-  .mark {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 24px;
+
+  .intro {
+
+    top: 42px;
+
+    left: 25px;
+
   }
 
-  h1 {
-    font-size: clamp(64px, 22vw, 92px);
+
+  .intro-title {
+
+    font-size:
+      clamp(28px, 8vw, 40px);
+
   }
+
+
+  .intro p {
+
+    font-size: 14px;
+
+  }
+
+
+  .vertical-brand {
+
+    top: 28px;
+
+    right: 18px;
+
+  }
+
+
+  .signal-icon {
+
+    width: 32px;
+    height: 32px;
+
+  }
+
+
+  .vertical-name {
+
+    font-size: 8px;
+
+  }
+
+
+  .link-zone {
+
+    left: 24px;
+
+    bottom: 152px;
+
+    width:
+      calc(100vw - 70px);
+
+  }
+
 
   .link-row {
-    min-height: 68px;
-    grid-template-columns: 35px 1fr auto;
+
+    min-height: 47px;
+
   }
+
+
+  .link-title {
+
+    font-size: 17px;
+
+  }
+
+
+  .link-description {
+
+    font-size: 6px;
+
+  }
+
 
   .audio-panel {
-    align-items: flex-end;
+
+    left: 24px;
+
+    bottom: 76px;
+
+    grid-template-columns:
+      auto auto 120px;
+
   }
 
-  footer {
-    margin-top: 40px;
+
+  .footer {
+
+    right: 20px;
+
+    bottom: 22px;
+
   }
+
+
+  .footer-centre {
+
+    display: none;
+
+  }
+
+
+  .clock {
+
+    display: none;
+
+  }
+
 }
 
-/* ---------- ACCESSIBILITY ---------- */
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
+/* shorter phones */
+
+@media
+(max-height: 680px) {
+
+  .intro {
+
+    top: 26px;
+
   }
+
+
+  .intro p {
+
+    margin-top: 10px;
+
+  }
+
+
+  .link-zone {
+
+    bottom: 130px;
+
+  }
+
+
+  .audio-panel {
+
+    bottom: 62px;
+
+  }
+
 }
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 4px;
+
+  outline:
+    1px solid var(--blue);
+
+  outline-offset:
+    4px;
+
 }
 
+
 ::selection {
-  background: var(--blue);
-  color: white;
+
+  background:
+    var(--blue);
+
+  color:
+    var(--white);
+
+}
+
+
+@media
+(prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    transition: none !important;
+
+  }
+
 }
