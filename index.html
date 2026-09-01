@@ -3,79 +3,248 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f6f4ed" />
+
+  <meta name="theme-color" content="#dfe5ea" />
+
   <title>Noise Floor</title>
-  <meta name="description" content="Noise Floor — music, electronics, waves." />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <meta
+    name="description"
+    content="Noise Floor — play / build / listen. Music, electronics and sound at QUT."
+  />
+
+  <link
+    rel="icon"
+    href="assets/favicon.svg"
+    type="image/svg+xml"
+  />
+
   <link rel="stylesheet" href="styles.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
 </head>
+
 <body>
-  <div class="grain" aria-hidden="true"></div>
 
-  <main class="shell">
+  <main class="site">
 
-    <header class="topline">
-      <span>NF_001</span>
-      <span id="clock">--:--</span>
+    <!-- background photograph -->
+    <div class="hero-image" aria-hidden="true"></div>
+
+    <!-- soft atmospheric overlays -->
+    <div class="wash" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ==================================================
+         TOP LEFT
+         ================================================== -->
+
+    <header class="intro">
+
+      <div class="intro-title">
+        play <span>/</span> build <span>/</span> listen
+      </div>
+
+      <div class="intro-rule"></div>
+
+      <p>
+        exploring music and electronics<br>
+        from signal to sound.
+      </p>
+
     </header>
 
-    <section class="hero">
-      <div class="mark" aria-hidden="true">NF</div>
 
-      <p class="eyebrow">
-        QUT / BRISBANE / AUDIO ENGINEERING CLUB
-      </p>
+    <!-- ==================================================
+         RIGHT SIDE IDENTITY
+         ================================================== -->
 
-      <h1>
-        NOISE<br>
-        FLOOR
-      </h1>
+    <aside class="vertical-brand">
 
-      <p class="tagline" id="tagline">
-        music · electronics · waves
-      </p>
+      <div class="signal-icon">
+        <svg viewBox="0 0 46 46" aria-hidden="true">
+          <circle cx="23" cy="23" r="20"></circle>
 
-      <div class="wave" aria-hidden="true">
-        <svg viewBox="0 0 800 100" role="img" aria-label="waveform">
-          <path d="M0 50 H120 L150 50 L170 14 L195 86 L222 32 L250 68 L280 45 L305 50 H390 L410 50 L430 20 L454 78 L480 40 L510 61 L536 49 H800"/>
+          <path
+            d="M7 24
+               H13
+               L16 14
+               L20 31
+               L24 17
+               L28 28
+               L31 21
+               H39"
+          ></path>
         </svg>
       </div>
-    </section>
 
-    <section class="links" id="links" aria-live="polite">
-      <div class="loading">LOADING SIGNAL…</div>
-    </section>
-
-    <section class="audio-panel" id="audioPanel" hidden>
-      <div>
-        <span class="micro">CURRENT SIGNAL</span>
-        <strong id="trackName">Noise Floor</strong>
+      <div class="vertical-name">
+        NOISE FLOOR
       </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         LINK NAVIGATION
+         ================================================== -->
+
+    <section class="link-zone">
+
+      <div class="section-label">
+        SIGNAL DIRECTORY
+      </div>
+
+      <nav
+        class="links"
+        id="links"
+        aria-live="polite"
+      >
+        <div class="loading">
+          tuning signal…
+        </div>
+      </nav>
+
+    </section>
+
+
+    <!-- ==================================================
+         AUDIO
+         ================================================== -->
+
+    <section
+      class="audio-panel"
+      id="audioPanel"
+      hidden
+    >
 
       <button
         id="soundButton"
-        class="sound-button"
+        class="sound-control"
         type="button"
+        aria-label="Play background sound"
       >
-        ENTER WITH SOUND
+        <span class="play-symbol">▶</span>
       </button>
+
+      <div class="audio-info">
+
+        <span class="micro">
+          CURRENT SIGNAL
+        </span>
+
+        <span id="trackName">
+          Noise Floor
+        </span>
+
+      </div>
+
+      <div class="mini-wave" aria-hidden="true">
+
+        <svg viewBox="0 0 180 30">
+
+          <path
+            d="
+            M0 15
+            L12 15
+            L17 9
+            L23 21
+            L28 12
+            L34 18
+            L43 15
+            L55 15
+            L61 6
+            L68 24
+            L74 10
+            L82 18
+            L91 14
+            L101 16
+            L111 15
+            L123 15
+            L130 11
+            L138 19
+            L146 13
+            L155 17
+            L164 15
+            H180
+            "
+          ></path>
+
+        </svg>
+
+      </div>
 
       <audio
         id="bgAudio"
         loop
         preload="none"
       ></audio>
+
     </section>
 
-    <footer>
-      <span>NOISE FLOOR</span>
-      <span>READ THE SIGNAL / MAKE SOME NOISE</span>
+
+    <!-- ==================================================
+         BOTTOM DETAILS
+         ================================================== -->
+
+    <footer class="footer">
+
+      <div class="footer-left">
+
+        <span>NOISE FLOOR</span>
+        <span>QUT / BRISBANE</span>
+
+      </div>
+
+      <div class="footer-centre">
+
+        <svg
+          class="footer-wave"
+          viewBox="0 0 240 30"
+          aria-hidden="true"
+        >
+          <path
+            d="
+            M0 15
+            C8 3 14 27 22 15
+            S36 3 44 15
+            S58 27 66 15
+            S80 3 88 15
+            S102 27 110 15
+            S124 3 132 15
+            S146 27 154 15
+            S168 3 176 15
+            S190 27 198 15
+            S212 3 220 15
+            S234 27 240 15
+            "
+          ></path>
+        </svg>
+
+      </div>
+
+      <div class="footer-right">
+
+        <strong>NF_004</strong>
+
+        <span>
+          WAVES / SIGNAL / SOUND
+        </span>
+
+      </div>
+
     </footer>
+
+
+    <!-- clock becomes a tiny technical detail -->
+    <div class="clock" id="clock">
+      --:--
+    </div>
 
   </main>
 
   <script src="app.js"></script>
+
 </body>
 </html>
