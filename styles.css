@@ -95,7 +95,7 @@ a {
 
    Put your image at:
 
-   assets/hero.jpg
+   assets/hero.png
    ========================================================== */
 
 .hero-image {
@@ -104,7 +104,7 @@ a {
   inset: 0;
 
   background-image:
-    url("assets/hero.jpg");
+    url("assets/hero.png");
 
   background-size: cover;
 
