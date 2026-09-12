@@ -27,19 +27,18 @@
 
 <body>
 
+  <!-- ==================================================
+       HERO
+       ================================================== -->
+
   <main class="site">
 
     <!-- background photograph -->
     <div class="hero-image" aria-hidden="true"></div>
 
-    <!-- soft atmospheric overlays -->
+    <!-- atmospheric overlays -->
     <div class="wash" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
-
-    <!-- ==================================================
-         TOP LEFT
-         ================================================== -->
-
 
 
     <!-- ==================================================
@@ -70,29 +69,6 @@
       </div>
 
     </aside>
-
-
-    <!-- ==================================================
-         LINK NAVIGATION
-         ================================================== -->
-
-    <section class="link-zone">
-
-      <div class="section-label">
-        SIGNAL DIRECTORY
-      </div>
-
-      <nav
-        class="links"
-        id="links"
-        aria-live="polite"
-      >
-        <div class="loading">
-          tuning signal…
-        </div>
-      </nav>
-
-    </section>
 
 
     <!-- ==================================================
@@ -171,7 +147,7 @@
 
 
     <!-- ==================================================
-         BOTTOM DETAILS
+         FOOTER DETAILS
          ================================================== -->
 
     <footer class="footer">
@@ -223,12 +199,66 @@
     </footer>
 
 
-    <!-- clock becomes a tiny technical detail -->
+    <!-- clock -->
     <div class="clock" id="clock">
       --:--
     </div>
 
+
+    <!-- ==================================================
+         SCROLL CUE
+         ================================================== -->
+
+    <a
+      class="scroll-cue"
+      href="#directory"
+      aria-label="Scroll to signal directory"
+    >
+      <span>ENTER SIGNAL</span>
+      <span class="scroll-line"></span>
+    </a>
+
   </main>
+
+
+  <!-- ==================================================
+       SIGNAL DIRECTORY
+       ================================================== -->
+
+  <section
+    class="directory-section"
+    id="directory"
+  >
+
+    <div class="directory-inner">
+
+      <header class="directory-header">
+
+        <div class="section-label">
+          SIGNAL DIRECTORY
+        </div>
+
+        <p class="directory-intro">
+          Frequencies, gatherings and transmissions from Noise Floor.
+        </p>
+
+      </header>
+
+
+      <nav
+        class="links"
+        id="links"
+        aria-live="polite"
+      >
+        <div class="loading">
+          tuning signal…
+        </div>
+      </nav>
+
+    </div>
+
+  </section>
+
 
   <script src="app.js"></script>
 
